@@ -32,15 +32,15 @@ conda install -y -c bioconda hmmer hhsuite==3.3.0 kalign2
 - Change `jaxlib==0.3.25+cuda11.cudnn805` version if this is not supported in your system
 
 ``` bash
-pip install absl-py==1.0.0 biopython==1.79 chex==0.0.7 dm-haiku==0.0.9 dm-tree==0.1.6 immutabledict==2.0.0 jax==0.3.25 ml-collections==0.1.0 numpy==1.21.6 pandas==1.3.4 protobuf==3.20.1 scipy==1.7.0 tensorflow-cpu==2.9.0
+pip install absl-py==1.0.0 biopython==1.79 chex==0.0.7 dm-haiku==0.0.9 dm-tree==0.1.6 immutabledict==2.0.0 jax==0.3.25 ml-collections==0.1.0 numpy==1.21.6 pandas==1.3.4 scipy==1.7.0 tensorflow-cpu==2.11.0
 
 pip install --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 ```
 
-### **Download alphafold release v2.3.1**
+### **Download alphafold release v2.3.2**
 
 ``` bash
-wget https://github.com/deepmind/alphafold/archive/refs/tags/v2.3.1.tar.gz && tar -xzf v2.3.1.tar.gz && export alphafold_path="$(pwd)/alphafold-2.3.1"
+wget https://github.com/deepmind/alphafold/archive/refs/tags/v2.3.2.tar.gz && tar -xzf v2.3.2.tar.gz && export alphafold_path="$(pwd)/alphafold-2.3.2"
 ```
 
 ### **Download chemical properties to the common folder**
@@ -84,7 +84,7 @@ bash download_db.sh -d </home/johndoe/alphafold_data>
 bash download_db.sh -d </home/johndoe/alphafold_data> -m reduced_dbs
 ```
 
-## **Running alphafold (v2.3.1)**
+## **Running alphafold (v2.3.2)**
 - Use this [bash script](https://github.com/kalininalab/alphafold_non_docker/blob/main/run_alphafold.sh)
 
 ``` bash
@@ -221,6 +221,10 @@ bash run_alphafold.sh -d alphafold_data/ -o dummy_test/ -f heteromer.fasta -t 20
 ```
 
 ## API changes
+
+### **API changes between v2.3.1 and v2.3.2**
+- Change in the usage of *-r* option.
+- Updated package requirements
 
 ### **API changes between v2.2.0 and v2.3.1**
 - AF2 parameters link and database download links have been updated.
