@@ -115,7 +115,7 @@ tar --extract --verbose --file="$pdb70/$pdb70_filename" --directory="$pdb70"
 rm "$pdb70/$pdb70_filename"
 
 # Download PDB obsolete data
-wget -P "$pdb_mmcif" "ftp://ftp.wwpdb.org/pub/pdb/data/status/obsolete.dat"
+wget -P "$pdb_mmcif" "https://files.wwpdb.org/pub/pdb/data/status/obsolete.dat"
 
 # Download PDB mmCIF database
 echo "Downloading PDB mmCIF database"
@@ -139,19 +139,19 @@ rm "$uniref30/$uniref30_filename"
 # Download Uniref90 database
 echo "Downloading Uniref90 database"
 uniref90_filename="uniref90.fasta.gz"
-wget -P "$uniref90" "ftp://ftp.uniprot.org/pub/databases/uniprot/uniref/uniref90/${uniref90_filename}"
+wget -P "$uniref90" "https://ftp.ebi.ac.uk/pub/databases/uniprot/uniref/uniref90/${uniref90_filename}"
 (cd "$uniref90" && gunzip "$uniref90_filename")
 
 # Download Uniprot database
 echo "Downloading Uniprot (TrEMBL and Swiss-Prot) database"
 trembl_filename="uniprot_trembl.fasta.gz"
 trembl_unzipped_filename="uniprot_trembl.fasta"
-wget -P "$uniprot" "ftp://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/complete/${trembl_filename}"
+wget -P "$uniprot" "https://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/complete/${trembl_filename}"
 (cd "$uniprot" && gunzip "$trembl_filename")
 
 sprot_filename="uniprot_sprot.fasta.gz"
 sprot_unzipped_filename="uniprot_sprot.fasta"
-wget -P "$uniprot" "ftp://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/complete/${sprot_filename}"
+wget -P "$uniprot" "https://ftp.ebi.ac.uk/pub/databases/uniprot/current_release/knowledgebase/complete/${sprot_filename}"
 (cd "$uniprot" && gunzip "$sprot_filename")
 
 # Concatenate TrEMBL and Swiss-Prot, rename to uniprot and clean up.
@@ -160,7 +160,7 @@ mv "$uniprot/$trembl_unzipped_filename" "$uniprot/uniprot.fasta"
 rm "$uniprot/$sprot_unzipped_filename"
 
 # Download PDB seqres database
-wget -P "$pdb_seqres" "ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_seqres.txt"
+wget -P "$pdb_seqres" "https://files.wwpdb.org/pub/pdb/derived_data/pdb_seqres.txt"
 grep --after-context=1 --no-group-separator '>.* mol:protein' "${pdb_seqres}/pdb_seqres.txt" > "${pdb_seqres}/pdb_seqres_filtered.txt"
 mv "${pdb_seqres}/pdb_seqres_filtered.txt" "${pdb_seqres}/pdb_seqres.txt"
 

@@ -10,7 +10,7 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && ba
 ### **Create a new conda environment and update**
 
 ``` bash
-conda create --name alphafold python==3.8
+conda create --name alphafold python==3.10
 conda update -n base conda
 ```
 
@@ -22,43 +22,29 @@ conda activate alphafold
 
 ### **Install dependencies**
 
-- Change `cudatoolkit==11.2.2` version if it is not supported in your system
-
 ``` bash
-conda install -y -c conda-forge openmm==7.5.1 cudatoolkit==11.2.2 pdbfixer
+conda install -y -c conda-forge openmm==7.7.0 pdbfixer
 conda install -y -c bioconda hmmer hhsuite==3.3.0 kalign2
 ```
 
-- Change `jaxlib==0.3.25+cuda11.cudnn805` version if this is not supported in your system
+- Change `jaxlib==0.4.25+cuda11.cudnn86` version if this is not supported in your system
 
 ``` bash
-pip install absl-py==1.0.0 biopython==1.79 chex==0.0.7 dm-haiku==0.0.9 dm-tree==0.1.6 immutabledict==2.0.0 jax==0.3.25 ml-collections==0.1.0 numpy==1.21.6 pandas==1.3.4 scipy==1.7.0 tensorflow-cpu==2.11.0
+pip install absl-py==1.0.0 biopython==1.79 chex==0.1.86 dm-haiku==0.0.12 dm-tree==0.1.8 immutabledict==2.0.0 jax==0.4.25 ml-collections==0.1.0 numpy==1.24.3 pandas==2.0.3 scipy==1.11.1 tensorflow-cpu==2.13.0
 
-pip install --upgrade --no-cache-dir jax==0.3.25 jaxlib==0.3.25+cuda11.cudnn805 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install --upgrade --no-cache-dir jax==0.4.25 jaxlib==0.4.25+cuda11.cudnn86 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 ```
 
-### **Download alphafold release v2.3.2**
+### **Download the latest release of alphafold**
 
 ``` bash
-wget https://github.com/deepmind/alphafold/archive/refs/tags/v2.3.2.tar.gz && tar -xzf v2.3.2.tar.gz && export alphafold_path="$(pwd)/alphafold-2.3.2"
+wget https://github.com/deepmind/alphafold/archive/7e7de59.tar.gz && tar -xzf 7e7de59.tar.gz && mv alphafold-7e7de59cd2c155c17fd27700d4ca55ccd088a390 alphafold-2.3 && export alphafold_path="$(pwd)/alphafold-2.3"
 ```
 
 ### **Download chemical properties to the common folder**
 
 ``` bash
 wget -q -P $alphafold_path/alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
-```
-
-### **Apply OpenMM patch**
-
-``` bash
-# $alphafold_path variable is set to the alphafold git repo directory (absolute path)
-
-cd ~/anaconda3/envs/alphafold/lib/python3.8/site-packages/ && patch -p0 < $alphafold_path/docker/openmm.patch
-
-# or
-
-cd ~/miniconda3/envs/alphafold/lib/python3.8/site-packages/ && patch -p0 < $alphafold_path/docker/openmm.patch
 ```
 
 ### **Download all databases**
